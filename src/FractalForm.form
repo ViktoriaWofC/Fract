@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="FractalForm">
+  <grid id="27dc6" binding="panelMain" layout-manager="FormLayout">
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:d:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="center:512px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:44px:noGrow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="20" y="20" width="1031" height="752"/>
+    </constraints>
+    <properties>
+      <preferredSize width="1050" height="498"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="79b63" binding="settingsPanel" layout-manager="FormLayout">
+        <rowspec value="center:d:grow"/>
+        <colspec value="fill:283px:grow"/>
+        <colspec value="left:5dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="282" height="170"/>
+          </grid>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="5d9b7" binding="startInfoPanel" layout-manager="FormLayout">
+            <rowspec value="center:d:noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:26px:noGrow"/>
+            <colspec value="fill:165px:noGrow"/>
+            <colspec value="left:8dlu:noGrow"/>
+            <colspec value="fill:0px:grow"/>
+            <colspec value="left:5dlu:noGrow"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="353" height="49"/>
+              </grid>
+              <forms/>
+            </constraints>
+            <properties>
+              <preferredSize width="198" height="125"/>
+              <requestFocusEnabled value="true"/>
+            </properties>
+            <border type="none" title="Настройки компрессии"/>
+            <children>
+              <component id="a55a2" class="javax.swing.JButton" binding="buttonDownloadPhoto">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="Загрузить изображение"/>
+                </properties>
+              </component>
+              <component id="906b" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="Размер рангового блока:"/>
+                </properties>
+              </component>
+              <component id="8ce6e" class="javax.swing.JSpinner" binding="spinnerBlockSize" custom-create="true">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="50" height="26"/>
+                </properties>
+              </component>
+              <component id="e9fb5" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms top="0" left="5" bottom="0" right="0" defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="Коэффициент компрессии:"/>
+                </properties>
+              </component>
+              <component id="a97ed" class="javax.swing.JSpinner" binding="spinnerCoefCompress" custom-create="true">
+                <constraints>
+                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="110" height="26"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="265ed" binding="endInfoPanel" layout-manager="FormLayout">
+            <rowspec value="center:48px:grow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:48px:noGrow"/>
+            <colspec value="fill:max(d;4px):noGrow"/>
+            <colspec value="left:4dlu:noGrow"/>
+            <colspec value="fill:max(d;4px):noGrow"/>
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="108" height="68"/>
+              </grid>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <preferredSize width="364" height="125"/>
+            </properties>
+            <border type="none" title="Настройки декомпрессии"/>
+            <children>
+              <component id="c77ae" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms top="0" left="5" bottom="0" right="0"/>
+                </constraints>
+                <properties>
+                  <text value="Базовое изображение:"/>
+                </properties>
+              </component>
+              <component id="8dce8" class="javax.swing.JComboBox" binding="comboBoxBaseImage" custom-create="true">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="150" height="26"/>
+                </properties>
+              </component>
+              <component id="b85b7" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="Количество итераций декопрессии:"/>
+                </properties>
+              </component>
+              <component id="ee3c1" class="javax.swing.JSpinner" binding="spinnerCountDecompress" custom-create="true">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="50" height="26"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="ac3e" binding="imagePanel" layout-manager="FormLayout">
+        <rowspec value="center:512px:grow"/>
+        <colspec value="fill:512px:grow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:512px:grow"/>
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="2d3e3" binding="panelStartImage" layout-manager="FormLayout">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="0" height="0"/>
+                <preferred-size width="512" height="512"/>
+                <maximum-size width="512" height="512"/>
+              </grid>
+              <forms defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <opaque value="true"/>
+              <preferredSize width="512" height="512"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="1635f" binding="panelEndImage" layout-manager="FormLayout">
+            <rowspec value="center:d:grow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="512" height="512"/>
+              </grid>
+              <forms/>
+            </constraints>
+            <properties>
+              <preferredSize width="512" height="512"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </grid>
+      <grid id="14a55" binding="statisticPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="53b06" binding="menuPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <component id="a3a71" class="javax.swing.JButton" binding="buttonCompress" custom-create="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Выполнить сжатие"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
