@@ -49,17 +49,17 @@ public class Decompress {
                         sum = 0;
                         for(int ii = 0; ii<2*rang.getK();ii++)
                             for(int jj = 0; jj<2*rang.getK();jj++) {
-                                color = new Color(domenBig[i * 2 * rang.getK() + ii][j * 2 * rang.getK() + jj]);
-                                sum += color.getRed();
-                                //sum += domenBig[i * 2 * rang.getK() + ii][j * 2 * rang.getK() + jj];
+                                //color = new Color(domenBig[i * 2 * rang.getK() + ii][j * 2 * rang.getK() + jj]);
+                                //sum += color.getRed();
+                                sum += domenBig[i * 2 * rang.getK() + ii][j * 2 * rang.getK() + jj];
                             }
 
 
                         d = (int) (sum/Math.pow(4,rang.getK()));
 
-                        color = new Color(d,d,d);
-                        domen[i][j] = color.getRGB();
-                        //domen[i][j] = d;
+                        //color = new Color(d,d,d);
+                        //domen[i][j] = color.getRGB();
+                        domen[i][j] = d;
                     }
 
                 domen = setAfinnInt(domen, rang.getK());
@@ -69,7 +69,7 @@ public class Decompress {
                 //;
                 for (int i = 0; i < r; i++)
                     for (int j = 0; j < r; j++) {
-                        //bi.setRGB(rang.getX0() + j, rang.getY0() + i, domen[i][j] + (domen[i][j] << 8) + (domen[i][j] << 16));
+                        bi.setRGB(rang.getX0() + j, rang.getY0() + i, domen[i][j] + (domen[i][j] << 8) + (domen[i][j] << 16));
 
                         //bi.setRGB(rang.getX0()+j,rang.getY0()+i,domen[i][j]);
 
@@ -83,11 +83,11 @@ public class Decompress {
                         color = new Color(dd,dd,dd);
                         bi.setRGB(rang.getX0()+j,rang.getY0() + i,color.getRGB());*/
 
-                        color = new Color(domen[i][j]);
-                        int red = color.getRed();
-                        int green = color.getGreen();
-                        int blue = color.getBlue();
-                        bi.setRGB(rang.getX0()+j,rang.getY0() + i,color.getRGB());
+                        //color = new Color(domen[i][j]);
+                        //int red = color.getRed();
+                        //int green = color.getGreen();
+                        //int blue = color.getBlue();
+                        //bi.setRGB(rang.getX0()+j,rang.getY0() + i,color.getRGB());
 
 
                         //bi.setRGB(rang.getX0()+j,rang.getY0() + i,blue + (green << 8) + (red << 16));

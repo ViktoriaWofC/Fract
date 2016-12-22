@@ -53,7 +53,7 @@
             </properties>
             <border type="none" title="Настройки компрессии"/>
             <children>
-              <component id="a55a2" class="javax.swing.JButton" binding="buttonDownloadPhoto">
+              <component id="a55a2" class="javax.swing.JButton" binding="buttonDownloadPhoto" custom-create="true">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <forms defaultalign-horz="false"/>
@@ -171,6 +171,17 @@
         <border type="none"/>
         <children>
           <grid id="2d3e3" binding="panelStartImage" layout-manager="FormLayout">
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:201dlu:noGrow"/>
+            <rowspec value="center:57px:grow"/>
+            <rowspec value="top:31px:noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="top:50px:noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <colspec value="left:4dlu:noGrow"/>
+            <colspec value="fill:d:grow"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <minimum-size width="0" height="0"/>
@@ -184,7 +195,35 @@
               <preferredSize width="512" height="512"/>
             </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="fd3e7" class="javax.swing.JLabel" binding="labelTest">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-vert="false"/>
+                </constraints>
+                <properties>
+                  <text value="Label"/>
+                </properties>
+              </component>
+              <component id="d109c" class="javax.swing.JLabel" binding="labelTest2">
+                <constraints>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <text value="Label"/>
+                </properties>
+              </component>
+              <component id="205af" class="javax.swing.JLabel" binding="labelTest3">
+                <constraints>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <text value="Label"/>
+                </properties>
+              </component>
+            </children>
           </grid>
           <grid id="1635f" binding="panelEndImage" layout-manager="FormLayout">
             <rowspec value="center:d:grow"/>

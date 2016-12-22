@@ -40,7 +40,7 @@ public class Main {
 
         String startImageName = "7.jpg";
         String greyImageName = "grey.jpg";
-        String baseImageName = "base.jpg";
+        String baseImageName = "baseClet.jpg";
         String endImageName = "end.jpg";
         String bat = "bat.bat";
         String path1 = "D:/университет/диплом/fractImage/"+startImageName;

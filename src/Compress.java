@@ -84,14 +84,12 @@ public class Compress {
                         //sumR = 0; sumG = 0; sumB = 0;
                         for(int ii = 0; ii<2*k;ii++)
                             for(int jj = 0; jj<2*k;jj++) {
-                                //sum += domenBig[i * 2 * k + ii][j * 2 * k + jj];
+                                sum += domenBig[i * 2 * k + ii][j * 2 * k + jj];
 
-                                color = new Color(domenBig[i * 2 * k + ii][j * 2 * k + jj]);
-                                sum += color.getRed();
+                                //color = new Color(domenBig[i * 2 * k + ii][j * 2 * k + jj]);
+                                //sum += color.getRed();
 
-                                //sumR = color.getRed();
-                                //sumG = color.getGreen();
-                                //sumB = color.getBlue();
+
                             }
                         d = (int) (sum/Math.pow(4,k));
 
@@ -102,9 +100,9 @@ public class Compress {
                         //int grey = (int) (0.3*dR + 0.59*dG + 0.11 *dB);
                         //d = grey + (grey << 8) + (grey << 16);
 
-                        color = new Color(d,d,d);
-                        domen[i][j] = color.getRGB();
-                        //domen[i][j] = d;
+                        //color = new Color(d,d,d);
+                        //domen[i][j] = color.getRGB();
+                        domen[i][j] = d;
 
                         //dR = (int) (sumR/Math.pow(4,k));
                         //dG = (int) (sumG/Math.pow(4,k));
@@ -177,7 +175,7 @@ public class Compress {
         for (int i = 0; i < k; i++)
             for (int j = 0; j < k; j++) {
 
-                h = (domen[i][j] - rang[i][j]) / 100000;
+                h = (domen[i][j] - rang[i][j]) / 10000;
                 //h = (domen[i][j] - rang[i][j]);
                 sum += h * h;
             }

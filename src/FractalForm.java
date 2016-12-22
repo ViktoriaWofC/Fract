@@ -10,8 +10,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by User on 21.12.2016.
@@ -34,11 +37,21 @@ public class FractalForm extends JFrame {
     private JButton buttonCompress;
     private JPanel panelStartImage;
     private JPanel panelEndImage;
+    private JLabel labelTest2;
+    private JLabel labelTest3;
     private JMenuBar menuBar;
 
 
     ////////
     Graphics g;
+
+    BufferedImage bi = null;
+    int[][] pixels;
+    int n, m;
+    Compress compress;
+    List<Rang> rangList;
+    Decompress decompress;
+    File file;
     ////////
 
     public FractalForm() {
@@ -88,26 +101,211 @@ public class FractalForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-                String filename = "D:/университет/диплом/fractImage/1.jpg";
-                Image image = null;
                 try {
-                    image = ImageIO.read(new File(filename));
+                    bi = ImageIO.read(file);
                 } catch (IOException ee) {
                     ee.printStackTrace();
                 }
-                g = panelStartImage.getGraphics();
-                g.drawImage(image, 0, 0, null);
+
+                pixels = new int[n][m];
+                //
+                int argb = 0;
+                Color color;
+                int f;
+
+                for (int i = 0; i < n; i++)
+                    for (int j = 0; j < m; j++) {
+                        //argb = bi.getRGB(j,i);
+                        //color = new Color(argb);
+                        //f = color.getRed();
+                        //pixels[i][j] = f;
+                        //pixels[i][j] = getRGBValue(bi, j, i);
+                        pixels[i][j] = bi.getRGB(j, i);
+
+                    }
+
+                int r = Integer.valueOf(spinnerBlockSize.getValue().toString());
+                int eps = Integer.valueOf(spinnerCoefCompress.getValue().toString());
+
+                String s = "";
+
+                compress = new Compress(pixels, r, eps);
+
+                long t1 = System.currentTimeMillis();
+                compress.compressImage();
+                rangList = compress.getRangList();
+                long t2 = System.currentTimeMillis();
+                String ss = "compress time :" + (t2 - t1) / 1000;
+
+                s += ss + " ";
+                ////////////////////////////////////
+                String pathBase = "D:/университет/диплом/fractImage/";
+                String pb;
+                if (comboBoxBaseImage.getSelectedIndex() == 0)
+                    pb = pathBase + "baseClet.jpg";
+                else if (comboBoxBaseImage.getSelectedIndex() == 1)
+                    pb = pathBase + "baseWhite.jpg";
+                else pb = pathBase + "baseBlack.jpg";
+
+                bi = null;
+                try {
+                    //bi = ImageIO.read(new File(path2));
+                    bi = ImageIO.read(new File(pb));
+                } catch (IOException ee) {
+                    ee.printStackTrace();
+                }
+
+                bi = getGray(bi);
+
+                decompress = new Decompress(rangList, bi, r);
+
+                int col = Integer.valueOf(spinnerCountDecompress.getValue().toString());
+
+                t1 = System.currentTimeMillis();
+                bi = decompress.decompressImage(col);
+                t2 = System.currentTimeMillis();
+
+                ss = "decompress time :" + (t2 - t1) / 1000;
+
+                s += "\n" + ss + " ";
 
                 g = panelEndImage.getGraphics();
-                g.drawImage(image, 0, 0, null);
+                //g.drawImage(image, 0, 0, null);
+
+                //bi = getGray(bi);
+                g.drawImage(bi, 0, 0, null);
+
+                //////////////////////////////////////////
+                //записываем rangList  в файл
+                //List<Long> longList = new ArrayList<>();
+                long longList[] = new long[rangList.size()];
+                int ii = 0;
+                long d = 0;
+                for (Rang rang : rangList) {
+                    //преобразование из Rang в число long
+                    d = rang.getY0() + (rang.getX0() << 21) + (rang.getK() << 25) + (rang.getAfinn() << 29) + (rang.getY() << 40) + (rang.getX() << 51);
+                    //longList.add(d);
+                    longList[ii] = d;
+                    ii++;
+                }
+
+                String pathBat = "D:/университет/диплом/fractImage/bat.bat";
+                File fi = new File(pathBat);
+
+                try {
+                    //проверяем, что если файл не существует то создаем его
+                    if (!fi.exists()) {
+                        fi.createNewFile();
+                    }
+
+                    //PrintWriter обеспечит возможности записи в файл
+                    PrintWriter out = new PrintWriter(fi.getAbsoluteFile());
+
+                    try {
+                        //Записываем текст у файл
+                        out.print(longList);
+                    } finally {
+                        //После чего мы должны закрыть файл
+                        //Иначе файл не запишется
+                        out.close();
+                    }
+                } catch (IOException ee) {
+                    throw new RuntimeException(ee);
+                }
+
+                //////////////////////////////////////////
+
+
+                labelTest.setText(s);
+                s = " \n image size:" + file.length() + " byte \n compres size:" + fi.length() + " byte";
+                labelTest2.setText(s);
+                s = "компрессия: " + file.length() / fi.length();
+                labelTest3.setText(s);
+                //s = spinnerBlockSize.getValue().toString() + " " + spinnerCoefCompress.getValue().toString()
+                //        + " " + spinnerCountDecompress.getValue().toString() + " " + comboBoxBaseImage.getSelectedItem().toString();
+                //labelTest.setText(s);
 
             }
         });
 
+        buttonDownloadPhoto = new JButton();
+        buttonDownloadPhoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileopen = new JFileChooser();
+                int ret = fileopen.showDialog(null, "Открыть файл");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    file = fileopen.getSelectedFile();
+                    labelTest.setText(file.getName());
+                    Image image = null;
+                    try {
+                        image = ImageIO.read(file);
+                        bi = ImageIO.read(file);
+                    } catch (IOException ee) {
+                        ee.printStackTrace();
+                    }
+                    g = panelStartImage.getGraphics();
+                    //g.drawImage(image, 0, 0, null);
+
+                    bi = getGray(bi);
+                    g.drawImage(bi, 0, 0, null);
+                    m = bi.getWidth();
+                    n = bi.getHeight();
+                }
+            }
+        });
         //
 
     }
+
+    public static BufferedImage getGray(BufferedImage bi) {
+        int argb;
+        int r, g, b, grey;
+        Color color, color1, color2;
+
+        for (int i = 0; i < bi.getHeight(); i++)
+            for (int j = 0; j < bi.getWidth(); j++) {
+                argb = getRGBValue(bi, j, i);
+                color = new Color(argb, true);
+                r = color.getRed();
+                g = color.getGreen();
+                b = color.getBlue();
+                grey = (int) (0.3 * r + 0.59 * g + 0.11 * b);
+                bi.setRGB(j, i, grey + (grey << 8) + (grey << 16));
+            }
+
+        /*for(int i = 0; i<bi.getHeight();i++)
+            for(int j = 0; j<bi.getWidth();j++){
+                argb = getRGBValue(bi,j,i);
+                color = new Color(argb, true);
+                r = color.getRed();
+                g = color.getGreen();
+                b = color.getBlue();
+                grey = (int) (0.3*r + 0.59*g + 0.11 *b);
+                color = new Color(grey + (grey << 8) + (grey << 16));
+
+                int k = 0;
+                color2 = null;
+                while (color2==null){
+                    for(k = 0; k<255;k++){
+                        color1 = new Color(0,0,0,k);
+                        if(color.getRGB()==color1.getRGB())
+                            color2 = new Color(0,0,0,k);
+                    }
+                }
+
+
+                bi.setRGB(j,i,color2.getRGB());
+            }*/
+
+        return bi;
+    }
+
+    public static int getRGBValue(BufferedImage bi, int x, int y) {
+        //Object colorData1 = bi.getRaster().getDataElements(j, i, null);//данные о пикселе
+        return bi.getColorModel().getRGB(bi.getRaster().getDataElements(x, y, null));//преобразование данных в цветовое значение
+    }
+
 
     /**
      * Method generated by IntelliJ IDEA GUI Designer
@@ -131,7 +329,6 @@ public class FractalForm extends JFrame {
         startInfoPanel.setRequestFocusEnabled(true);
         settingsPanel.add(startInfoPanel, cc.xy(1, 1));
         startInfoPanel.setBorder(BorderFactory.createTitledBorder("Настройки компрессии"));
-        buttonDownloadPhoto = new JButton();
         buttonDownloadPhoto.setText("Загрузить изображение");
         startInfoPanel.add(buttonDownloadPhoto, cc.xyw(1, 1, 4, CellConstraints.LEFT, CellConstraints.DEFAULT));
         final JLabel label1 = new JLabel();
@@ -163,10 +360,19 @@ public class FractalForm extends JFrame {
         imagePanel.setLayout(new FormLayout("fill:512px:grow,left:4dlu:noGrow,fill:512px:grow", "center:512px:grow"));
         panelMain.add(imagePanel, cc.xy(1, 5, CellConstraints.DEFAULT, CellConstraints.FILL));
         panelStartImage = new JPanel();
-        panelStartImage.setLayout(new FormLayout("", ""));
+        panelStartImage.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:d:grow", "center:max(d;4px):noGrow,top:201dlu:noGrow,center:57px:grow,top:31px:noGrow,top:4dlu:noGrow,top:50px:noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
         panelStartImage.setOpaque(true);
         panelStartImage.setPreferredSize(new Dimension(512, 512));
         imagePanel.add(panelStartImage, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.FILL));
+        labelTest = new JLabel();
+        labelTest.setText("Label");
+        panelStartImage.add(labelTest, cc.xy(3, 3, CellConstraints.DEFAULT, CellConstraints.CENTER));
+        labelTest2 = new JLabel();
+        labelTest2.setText("Label");
+        panelStartImage.add(labelTest2, cc.xy(3, 4));
+        labelTest3 = new JLabel();
+        labelTest3.setText("Label");
+        panelStartImage.add(labelTest3, cc.xy(3, 6));
         panelEndImage = new JPanel();
         panelEndImage.setLayout(new FormLayout("fill:d:grow", "center:d:grow"));
         panelEndImage.setPreferredSize(new Dimension(512, 512));
