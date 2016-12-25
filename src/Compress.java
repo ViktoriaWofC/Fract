@@ -125,8 +125,19 @@ public class Compress {
                 while((h<6)&&(b==false)) {
                     if (compareBlocs(rang, domen)) {
                         b = true;
-                        ran = new Rang(jd * r, id * r, h,k,x,y);
+                        ran = new Rang(jd * r, id * r, h,k,x,y,1);
                     }else {
+                        double bright = 4;
+                        while((bright>=0.25)&&(b==false)){
+                            if (compareBlocs(rang, changeBright(domen,bright))) {
+                                b = true;
+                                ran = new Rang(jd * r, id * r, h,k,x,y,k);
+                            }else{
+                                if(bright/2==1)
+                                    bright = bright/4;
+                                else bright = bright/2;
+                            }
+                        }
                         h++;
                         domen = setAfinnInt(domen,h);
                     }
@@ -172,11 +183,17 @@ public class Compress {
         int k = rang.length;
         double h = 0;
 
+        Color colorDomen, colorRang;
+
         for (int i = 0; i < k; i++)
             for (int j = 0; j < k; j++) {
 
+                //colorDomen = new Color(domen[i][j]);
+                //colorRang = new Color(rang[i][j]);
+                //h = (colorDomen.getRed() - colorRang.getRed())/1000;
+
                 h = (domen[i][j] - rang[i][j]) / 10000;
-                //h = (domen[i][j] - rang[i][j]);
+
                 sum += h * h;
             }
 
@@ -188,6 +205,22 @@ public class Compress {
         else b = false;
 
         return b;
+    }
+
+    public int[][] changeBright(int[][] pix, double k){
+        int n = pix.length;
+        int x;
+        int[][] p = new int[n][n];
+        Color color;
+
+        for(int i = 0; i<n;i++)
+            for(int j = 0; j<n;j++){
+                color = new Color(pix[i][j]);
+                x = color.getRed();
+                x = (int)(x*k);
+                p[i][j] = x;
+            }
+        return p;
     }
 
     public int[][] setAfinnInt(int[][] pix, int k){

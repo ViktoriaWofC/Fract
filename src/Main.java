@@ -40,7 +40,7 @@ public class Main {
 
         String startImageName = "7.jpg";
         String greyImageName = "grey.jpg";
-        String baseImageName = "baseClet.jpg";
+        String baseImageName = "baseWhite.jpg";
         String endImageName = "end.jpg";
         String bat = "bat.bat";
         String path1 = "D:/университет/диплом/fractImage/"+startImageName;
@@ -85,8 +85,8 @@ public class Main {
                 //color = new Color(argb);
                 //f = color.getRed();
                 //pixels[i][j] = f;
-                //pixels[i][j] = getRGBValue(bi, j, i);
-                pixels[i][j] = bi.getRGB(j,i);
+                pixels[i][j] = getRGBValue(bi, j, i);
+                //pixels[i][j] = bi.getRGB(j,i);
 
             }
 
@@ -166,9 +166,10 @@ public class Main {
         }*/
 ///////////////////////////////////////////////////////////
 
+
         int r = 4;
         Compress compress = new Compress(pixels,r,20000);
-
+        //Compress compress = new Compress(pixels,r,400);
 
         System.out.println("");
         long t1 = System.currentTimeMillis();
@@ -246,7 +247,7 @@ public class Main {
         System.out.println("");
         t1 = System.currentTimeMillis();
         System.out.println("start decompress :"+t1);
-        bi = decompress.decompressImage(10);
+        bi = decompress.decompressImage(5);
         t2 = System.currentTimeMillis();
         System.out.println("end decompress :"+t2);
         System.out.println("time :"+(t2-t1)/1000);
@@ -297,11 +298,12 @@ public class Main {
 */
 
 
+        /////////////////////////////////////////////////////////////
 
-        FractalForm fractalForm = new FractalForm();
-        fractalForm.pack();
-        fractalForm.setSize(1050,700);
-        fractalForm.setVisible(true);
+        //FractalForm fractalForm = new FractalForm();
+        //fractalForm.pack();
+        //fractalForm.setSize(1050,700);
+        //fractalForm.setVisible(true);
 
     }
 

@@ -39,6 +39,7 @@ public class Decompress {
                         //color = new Color(bi.getRGB(rang.getX() + j, rang.getY() + i));
                         //int f = color.getRed();
                         //domenBig[i][j] = f;//bi.getRGB(rang.getX() + j, rang.getY() + i);
+                        //domenBig[i][j] = bi.getRGB(rang.getX() + j, rang.getY() + i);
                         domenBig[i][j] = bi.getRGB(rang.getX() + j, rang.getY() + i);
                     }
 

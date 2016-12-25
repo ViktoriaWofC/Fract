@@ -12,9 +12,9 @@ public class Rang implements Serializable{
     private int k;
     private int x0;
     private int y0;
-    //private double bright;
+    private double bright;
 
-    public Rang(int x,int y,int afinn,int k, int x0, int y0){
+    public Rang(int x,int y,int afinn,int k, int x0, int y0,double bright){
         this.x = x;
         this.y = y;
         this.afinn = afinn;
@@ -22,6 +22,8 @@ public class Rang implements Serializable{
         this.k = k;
         this.x0 = x0;
         this.y0 = y0;
+
+        this.bright = bright;
     }
 
     public int getX(){
@@ -48,4 +50,7 @@ public class Rang implements Serializable{
         return k;
     }
 
+    public double getBright(){
+        return bright;
+    }
 }
